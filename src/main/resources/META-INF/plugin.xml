@@ -1,0 +1,18 @@
+<idea-plugin>
+    <id>com.example.demo1</id>
+    <name>Demo1</name>
+    <vendor email="example@teya.com" url="https://www.yourcompany.com">Teya</vendor>
+    <description><![CDATA[My wonderful plugin to do wonderful things]]></description>
+    <depends>com.intellij.modules.platform</depends>
+    <actions>
+        <action class="com.example.demo1.MyAction"
+                id="MyAction"
+                text="_My Action">
+            <add-to-group group-id="EditorPopupMenu"/>
+        </action>
+    </actions>
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="My Notification Group"
+                           displayType="BALLOON" />
+    </extensions>
+</idea-plugin>

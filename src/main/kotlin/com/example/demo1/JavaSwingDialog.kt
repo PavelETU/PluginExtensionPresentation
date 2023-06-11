@@ -23,33 +23,29 @@ class JavaSwingDialog(private val project: Project?) : DialogWrapper(true) {
         val dialogContent = JPanel()
         val input = JTextField()
         val outputText = JTextArea()
-        val processBtn = JButton("Process a command")
-        val outputPanel = JBScrollPane(outputText, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER)
-        processBtn.addActionListener { runCommandLineCommand(outputText, input) }
+        val processBtn = JButton("Process")
+        val outputPanel =
+            JBScrollPane(outputText, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER)
+        processBtn.addActionListener { outputText.text = processCommandLine(input.text) }
         dialogContent.layout = BoxLayout(dialogContent, BoxLayout.PAGE_AXIS)
-        dialogContent.add(input)
-        dialogContent.add(processBtn)
         processBtn.alignmentX = Component.CENTER_ALIGNMENT
-        outputPanel.alignmentY = Component.BOTTOM_ALIGNMENT
-        input.alignmentY = Component.TOP_ALIGNMENT
         outputPanel.preferredSize = Dimension(500, 100)
         dialogContent.preferredSize = Dimension(500, 250)
+        dialogContent.add(input)
+        dialogContent.add(processBtn)
         dialogContent.add(outputPanel)
         return dialogContent
     }
 
-    private fun runCommandLineCommand(outputText: JTextArea, jTextField: JTextField) {
-        try {
-            val commands = jTextField.text.split(" ")
-            val generalCommandLine = GeneralCommandLine(commands)
-            generalCommandLine.charset = Charset.forName("UTF-8")
-            generalCommandLine.workDirectory = File(project?.basePath ?: project.toString())
-            val output = ScriptRunnerUtil.getProcessOutput(generalCommandLine)
-            outputText.text = output
-        } catch (t: Throwable) {
-            outputText.text = "Invalid command"
-        }
-
+    private fun processCommandLine(input: String): String = try {
+        val commands = input.split(" ")
+        val generalCommandLine = GeneralCommandLine(commands)
+        generalCommandLine.charset = Charset.forName("UTF-8")
+        generalCommandLine.workDirectory = File(project?.basePath ?: project.toString())
+        val output = ScriptRunnerUtil.getProcessOutput(generalCommandLine)
+        output
+    } catch (t: Throwable) {
+        "Invalid command"
     }
 
     override fun createActions(): Array<Action> {

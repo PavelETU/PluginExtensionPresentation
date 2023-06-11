@@ -1,7 +1,8 @@
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.8.21"
+    id("org.jetbrains.kotlin.jvm") version "1.8.20"
     id("org.jetbrains.intellij") version "1.13.3"
+    id("org.jetbrains.compose") version "1.4.0"
 }
 
 group = "com.example"
@@ -9,6 +10,10 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+}
+
+dependencies {
+    implementation(compose.desktop.currentOs)
 }
 
 // Configure Gradle IntelliJ Plugin

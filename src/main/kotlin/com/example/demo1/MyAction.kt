@@ -5,6 +5,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 
 class MyAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
-        JavaSwingDialog(e.project).show()
+        ComposeDialog(e.project).show()
     }
 }

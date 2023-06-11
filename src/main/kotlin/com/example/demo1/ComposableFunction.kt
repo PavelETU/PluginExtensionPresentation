@@ -2,6 +2,7 @@ package com.example.demo1
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
@@ -28,7 +29,7 @@ fun ComposableView(output: String, action: (String) -> Unit) {
         Button(onClick = { action(textState.value.text) }) {
             Text("Process")
         }
-        Column(Modifier.verticalScroll(rememberScrollState())) {
+        Column(Modifier.verticalScroll(rememberScrollState()).fillMaxWidth()) {
             Text(output)
         }
     }

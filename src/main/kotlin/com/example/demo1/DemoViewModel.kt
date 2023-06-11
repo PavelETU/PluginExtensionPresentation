@@ -18,8 +18,7 @@ class DemoViewModel(private val project: Project?) {
             val generalCommandLine = GeneralCommandLine(commands)
             generalCommandLine.charset = Charset.forName("UTF-8")
             generalCommandLine.workDirectory = File(project?.basePath ?: project.toString())
-            val output = ScriptRunnerUtil.getProcessOutput(generalCommandLine)
-            output
+            ScriptRunnerUtil.getProcessOutput(generalCommandLine)
         } catch (t: Throwable) {
             "Invalid command"
         })
